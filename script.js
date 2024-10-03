@@ -82,4 +82,15 @@ function drawMatrix() {
     ctx.fillStyle = '#0F0'; // Green text
     ctx.font = `${fontSize}px monospace`;
 
-    for
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+
+setInterval(drawMatrix, 33); // Adjust speed of falling code

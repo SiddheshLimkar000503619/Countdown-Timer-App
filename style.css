@@ -13,14 +13,14 @@ body {
     position: relative;
 }
 
-/* Canvas for matrix effect */
+/* Matrix falling code effect */
 #matrixCanvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -1; /* Places the canvas behind everything */
     background-color: black;
 }
 
@@ -34,6 +34,8 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
     z-index: 1;
     text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 /* Clock and countdown timer style */
@@ -86,15 +88,4 @@ ul#todoList li {
     padding: 5px;
     font-size: 18px;
     cursor: pointer;
-}
-
-/* Matrix falling code effect */
-#matrixCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Places the canvas behind everything */
-    background-color: black;
 }
