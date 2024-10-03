@@ -7,7 +7,7 @@ body {
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     height: 100vh;
     overflow: hidden;
     position: relative;
@@ -20,22 +20,38 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Places the canvas behind everything */
+    z-index: -1;
     background-color: black;
 }
 
-/* Glass container for clocks and timers */
+/* General glass effect styling */
 .glass-container {
+    backdrop-filter: blur(15px) saturate(200%);
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    padding: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: 1;
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    width: 400px;
     text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 90%;
+    margin: 20px;
+}
+
+/* Specific glass effects for different sections */
+.glass-clocks {
+    backdrop-filter: blur(15px) brightness(150%) saturate(200%);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.glass-timers {
+    backdrop-filter: blur(20px) contrast(125%);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.glass-tasks {
+    backdrop-filter: blur(15px) contrast(130%) saturate(180%);
+    background: rgba(255, 255, 255, 0.07);
 }
 
 /* Clock and countdown timer style */
@@ -44,7 +60,6 @@ body {
     justify-content: space-around;
     width: 100%;
     font-size: 1.2rem;
-    margin-bottom: 20px;
 }
 
 .task h2 {
@@ -62,7 +77,7 @@ body {
 
 /* To-Do List Styling */
 .todo-container {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 input#newTodo {
@@ -75,7 +90,6 @@ input#newTodo {
 button {
     padding: 10px;
     font-size: 16px;
-    margin-left: 10px;
 }
 
 ul#todoList {

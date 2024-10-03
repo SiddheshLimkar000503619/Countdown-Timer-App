@@ -62,7 +62,7 @@ function startExamTimer(elementId) {
     }, 1000);
 }
 
-// Matrix Falling Code Background
+// Matrix Falling Code Background with Color Shifting
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -75,11 +75,21 @@ const columns = canvas.width / fontSize;
 
 const drops = Array(Math.floor(columns)).fill(0);
 
+let matrixColor = '#0F0'; // Starting color (green)
+
+// Function to randomly change matrix color every minute
+function shiftMatrixColor() {
+    const colors = ['#0F0', '#FFF', `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`];
+    matrixColor = colors[Math.floor(Math.random() * colors.length)];
+}
+
+setInterval(shiftMatrixColor, 60000); // Change color every minute
+
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#0F0'; // Green text
+    ctx.fillStyle = matrixColor; // Dynamic matrix color
     ctx.font = `${fontSize}px monospace`;
 
     for (let i = 0; i < drops.length; i++) {
