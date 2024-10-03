@@ -7,10 +7,22 @@ body {
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 100vh;
-    overflow: hidden;
+    justify-content: center;
+    min-height: 100vh;
     position: relative;
+    overflow: hidden;
+}
+
+/* Flexbox container for widgets */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Matrix falling code effect */
@@ -32,10 +44,9 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 20px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    width: 400px;
+    width: 300px;
     text-align: center;
     max-width: 90%;
-    margin: 20px;
 }
 
 /* Specific glass effects for different sections */
@@ -57,12 +68,11 @@ body {
 /* Clock and countdown timer style */
 .clock {
     display: flex;
-    justify-content: space-around;
-    width: 100%;
-    font-size: 1.2rem;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.task h2 {
+.task h3 {
     margin: 10px 0;
 }
 
@@ -71,7 +81,7 @@ body {
 }
 
 #timer1, #timer2, #timer3, #timer4 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 

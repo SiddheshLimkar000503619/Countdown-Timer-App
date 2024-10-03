@@ -77,13 +77,13 @@ const drops = Array(Math.floor(columns)).fill(0);
 
 let matrixColor = '#0F0'; // Starting color (green)
 
-// Function to randomly change matrix color every minute
+// Function to randomly change matrix color every 10 seconds
 function shiftMatrixColor() {
     const colors = ['#0F0', '#FFF', `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`];
     matrixColor = colors[Math.floor(Math.random() * colors.length)];
 }
 
-setInterval(shiftMatrixColor, 60000); // Change color every minute
+setInterval(shiftMatrixColor, 10000); // Change color every 10 seconds
 
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect

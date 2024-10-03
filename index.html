@@ -10,46 +10,51 @@
     <!-- Canvas for Matrix Background -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- Clock Widget -->
-    <div class="glass-container glass-clocks">
-        <div class="clock">
-            <div id="regina"></div>
-            <div id="mumbai"></div>
-            <div id="london"></div>
-            <div id="toronto"></div>
-            <div id="atlanta"></div>
-        </div>
-    </div>
-
-    <!-- Countdown Timers Widget -->
-    <div class="glass-container glass-timers">
-        <div class="timers">
-            <div class="task">
-                <h2>Data Analyst Associate Certification</h2>
-                <div id="timer1"></div>
-            </div>
-            <div class="task">
-                <h2>Data Analyst Certification</h2>
-                <div id="timer2"></div>
-            </div>
-            <div class="task">
-                <h2>Data Science Python Certification</h2>
-                <div id="timer3"></div>
-            </div>
-            <div class="task">
-                <h2>Data Science Associate Exam</h2>
-                <div id="timer4"></div>
+    <!-- Main container for flexible layout -->
+    <div class="container">
+        <!-- Clock Widget -->
+        <div class="glass-container glass-clocks">
+            <h2>World Clocks</h2>
+            <div class="clock">
+                <div id="regina"></div>
+                <div id="mumbai"></div>
+                <div id="london"></div>
+                <div id="toronto"></div>
+                <div id="atlanta"></div>
             </div>
         </div>
-    </div>
 
-    <!-- Task List Widget -->
-    <div class="glass-container glass-tasks">
-        <div class="todo-container">
+        <!-- Countdown Timers Widget -->
+        <div class="glass-container glass-timers">
+            <h2>Countdown Timers</h2>
+            <div class="timers">
+                <div class="task">
+                    <h3>Data Analyst Associate Certification</h3>
+                    <div id="timer1"></div>
+                </div>
+                <div class="task">
+                    <h3>Data Analyst Certification</h3>
+                    <div id="timer2"></div>
+                </div>
+                <div class="task">
+                    <h3>Data Science Python Certification</h3>
+                    <div id="timer3"></div>
+                </div>
+                <div class="task">
+                    <h3>Data Science Associate Exam</h3>
+                    <div id="timer4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task List Widget -->
+        <div class="glass-container glass-tasks">
             <h2>My To-Do List</h2>
-            <input type="text" id="newTodo" placeholder="Add new task">
-            <button onclick="addTodo()">Add</button>
-            <ul id="todoList"></ul>
+            <div class="todo-container">
+                <input type="text" id="newTodo" placeholder="Add new task">
+                <button onclick="addTodo()">Add</button>
+                <ul id="todoList"></ul>
+            </div>
         </div>
     </div>
 
