@@ -5,7 +5,7 @@ function updateWorldClocks() {
     const londonTime = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
     const torontoTime = new Date().toLocaleString("en-US", { timeZone: "America/Toronto" });
     const atlantaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
-    
+
     document.getElementById('regina').textContent = "Regina: " + reginaTime;
     document.getElementById('mumbai').textContent = "Mumbai: " + mumbaiTime;
     document.getElementById('london').textContent = "London: " + londonTime;
@@ -37,9 +37,11 @@ function countdown(endTime, elementId) {
     }, 1000);
 }
 
-// Example timers (Add more as needed)
+// Initialize countdown timers
 countdown("2024-10-05T19:00:00", "timer1");
 countdown("2024-10-09T19:00:00", "timer2");
+countdown("2024-10-11T19:00:00", "timer3");
+countdown("2024-10-12T11:59:00", "timer4");
 
 // Function to start a 3-hour exam timer after deadline
 function startExamTimer(elementId) {
@@ -59,3 +61,25 @@ function startExamTimer(elementId) {
         }
     }, 1000);
 }
+
+// Matrix Falling Code Background
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = '0123456789ABCDEF';
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+
+const drops = Array(Math.floor(columns)).fill(0);
+
+function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#0F0'; // Green text
+    ctx.font = `${fontSize}px monospace`;
+
+    for
