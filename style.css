@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #000; /* Black background */
+    background-color: black; /* Ensure background is always black */
     color: white;
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
@@ -18,18 +18,18 @@ body {
 .content-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    gap: 20px; /* Reduced gap between World Clocks and other widgets */
+    gap: 10px; /* Reduced gap between widgets */
     width: 90%;
     max-width: 1200px;
-    margin-top: 10px; /* Just one line of space above content */
+    margin-top: 20px; /* Minimal margin at the top */
 }
 
 /* Title styling */
 h2 {
-    margin-bottom: 20px;
-    font-size: 2.2rem; /* Slightly increased size */
+    margin-bottom: 10px; /* Slightly reduced space under titles */
+    font-size: 2.2rem;
     text-align: center;
 }
 
@@ -39,7 +39,7 @@ h2 {
     background: rgba(255, 255, 255, 0.05); /* Transparent glass effect */
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 20px;
+    padding: 15px; /* Reduced padding */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     text-align: center;
     width: 100%;
@@ -66,24 +66,24 @@ h2 {
 /* Individual clock style */
 .clock div {
     font-size: 1.5rem;
-    padding: 0 10px;
+    padding: 0 5px; /* Slightly reduced padding */
     text-align: center;
-    margin: 10px 0;
+    margin: 5px 0; /* Reduced margin */
 }
 
 /* Countdown Section */
 .task h3 {
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 1.6rem;
     text-align: center;
 }
 
 .task {
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Less space between tasks */
 }
 
 .blank-space {
-    height: 20px;
+    height: 10px; /* Reduced spacing between countdowns */
 }
 
 #timer1, #timer2, #timer3, #timer4, #timer5, #timer6 {
@@ -93,7 +93,7 @@ h2 {
 
 /* To-Do List Styling */
 .todo-container {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 input#newTodo {
@@ -128,7 +128,7 @@ ul#todoList li input[type="checkbox"] {
 
 ul#todoList li.done {
     text-decoration: line-through;
-    color: #999; /* Dull color for completed tasks */
+    color: #999;
 }
 
 /* Responsive Design */
