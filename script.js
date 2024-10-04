@@ -63,32 +63,13 @@ document.getElementById('welcomeModal').style.display = 'block';
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         document.getElementById('welcomeModal').style.display = 'none';
-        enableScrolling();
     }
 });
 
 // Hide the modal when the "Enter" button is clicked
 document.getElementById('enterButton').onclick = function() {
     document.getElementById('welcomeModal').style.display = 'none';
-    enableScrolling();
 };
-
-// Enable scrolling if content overflows or on zoom
-function enableScrolling() {
-    if (document.body.scrollHeight > window.innerHeight) {
-        document.body.style.overflowY = 'auto';
-    }
-}
-
-// Check for zoom changes and enable scrolling if needed
-let initialWidth = window.innerWidth;
-window.addEventListener('resize', function() {
-    if (window.innerWidth !== initialWidth) {
-        document.body.style.overflowY = 'auto';
-    } else {
-        document.body.style.overflowY = 'hidden';
-    }
-});
 
 // World Clock Function
 function updateWorldClocks() {
@@ -212,13 +193,9 @@ document.getElementById('toggleDeadlines').onclick = function() {
     if (additionalDeadlines.style.display === 'none') {
         additionalDeadlines.style.display = 'block';
         this.textContent = translations[currentLanguage]['hideAdditionalDeadlines'];
-        enableScrolling();
     } else {
         additionalDeadlines.style.display = 'none';
         this.textContent = translations[currentLanguage]['showAllDeadlines'];
-        if (document.body.scrollHeight <= window.innerHeight) {
-            document.body.style.overflowY = 'hidden';
-        }
     }
 };
 
@@ -226,148 +203,4 @@ document.getElementById('toggleDeadlines').onclick = function() {
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
 function renderTodos() {
-    const todoList = document.getElementById('todoList');
-    todoList.innerHTML = '';
-
-    todos.forEach((todo, index) => {
-        const li = document.createElement('li');
-        if (todo.done) {
-            li.classList.add('done');
-        }
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = todo.done;
-        checkbox.onclick = function() {
-            todos[index].done = !todos[index].done;
-            localStorage.setItem('todos', JSON.stringify(todos));
-            renderTodos();
-        };
-
-        const span = document.createElement('span');
-        span.textContent = todo.text;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-        deleteButton.onclick = function() {
-            todos.splice(index, 1);
-            localStorage.setItem('todos', JSON.stringify(todos));
-            renderTodos();
-        };
-
-        li.appendChild(checkbox);
-        li.appendChild(span);
-        li.appendChild(deleteButton);
-        todoList.appendChild(li);
-    });
-}
-
-function addTodo() {
-    const todoText = document.getElementById('newTodo').value.trim();
-    if (todoText === '') return;
-
-    todos.push({ text: todoText, done: false });
-    localStorage.setItem('todos', JSON.stringify(todos));
-    renderTodos();
-    document.getElementById('newTodo').value = '';
-}
-
-// Initial render
-renderTodos();
-
-// Matrix Falling Code Background with Color Effects
-const canvas = document.getElementById('matrixCanvas');
-const ctx = canvas.getContext('2d');
-
-function startMatrix() {
-    // Set canvas dimensions
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    // Characters to display
-    const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
-    const chars = matrixChars.split('');
-
-    // Font size and columns
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-
-    // Array of drops - one per column
-    const drops = Array.from({ length: columns }).fill(1);
-
-    // Color sequence: white, green, random color per character, random RGB
-    const colorSequence = ['white', 'green', 'randomPerChar', 'randomRGB'];
-    let colorIndex = 0;
-
-    // Function to get a random color
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        return '#' + Array.from({ length: 6 }).map(() => letters[Math.floor(Math.random() * 16)]).join('');
-    }
-
-    // Function to get a random RGB color
-    function getRandomRGB() {
-        const r = Math.floor(Math.random() * 256);
-        const g = Math.floor(Math.random() * 256);
-        const b = Math.floor(Math.random() * 256);
-        return `rgb(${r},${g},${b})`;
-    }
-
-    // Main draw function
-    function drawMatrix() {
-        // Semi-transparent background to create fading trail effect
-        ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.font = `${fontSize}px monospace`;
-
-        // Loop over drops
-        drops.forEach((y, x) => {
-            // Get a random character
-            const text = chars[Math.floor(Math.random() * chars.length)];
-
-            // Set color based on the current color sequence
-            switch (colorSequence[colorIndex]) {
-                case 'white':
-                    ctx.fillStyle = '#FFFFFF';
-                    break;
-                case 'green':
-                    ctx.fillStyle = '#00FF00';
-                    break;
-                case 'randomPerChar':
-                    ctx.fillStyle = getRandomColor();
-                    break;
-                case 'randomRGB':
-                    ctx.fillStyle = getRandomRGB();
-                    break;
-            }
-
-            // Draw the character
-            ctx.fillText(text, x * fontSize, y * fontSize);
-
-            // Reset drop to top randomly
-            if (y * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[x] = 0;
-            }
-
-            // Increment y coordinate for drop
-            drops[x]++;
-        });
-    }
-
-    // Change color every 5 seconds
-    setInterval(() => {
-        colorIndex = (colorIndex + 1) % colorSequence.length;
-    }, 5000);
-
-    // Redraw matrix every 50 milliseconds
-    setInterval(drawMatrix, 50);
-
-    // Adjust canvas size on window resize
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-}
-
-startMatrix();
+    const t
