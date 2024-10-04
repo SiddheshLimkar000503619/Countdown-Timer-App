@@ -43,7 +43,7 @@ setInterval(() => updateCountdown(deadline4, 'timer4'), 1000);
 setInterval(() => updateCountdown(deadline5, 'timer5'), 1000);
 setInterval(() => updateCountdown(deadline6, 'timer6'), 1000);
 
-// Matrix Falling Code Background (Movie-Like)
+// Matrix Falling Code Background (Movie-Like, ~350 FPS)
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -61,7 +61,8 @@ const fontSize = 16;
 const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(0);
 
-const matrixSpeed = 80; // Slow down matrix falling speed
+// To simulate ~350 FPS, drawMatrix is called more frequently
+const matrixSpeed = 16; // Higher speed value for smooth animation, ~350 FPS (1 frame = ~2.86ms)
 
 function drawMatrix() {
     // Ensure background remains black
@@ -73,11 +74,12 @@ function drawMatrix() {
     for (let i = 0; i < drops.length; i++) {
         const text = letters.charAt(Math.floor(Math.random() * letters.length));
 
-        // Matrix green color (without glow or breathing)
+        // Matrix green color
         ctx.fillStyle = '#0F0';
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
+        // Reset drop position when it reaches the bottom randomly
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
@@ -85,4 +87,5 @@ function drawMatrix() {
     }
 }
 
+// Call the draw function approximately every 2.86 milliseconds (~350 FPS)
 setInterval(drawMatrix, matrixSpeed);
