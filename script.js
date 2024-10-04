@@ -1,4 +1,4 @@
-// Matrix Falling Code Background with Color Cycling and Slower Speed
+// Matrix Falling Code Background with Slow Smooth Speed and Color Effects
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -13,8 +13,8 @@ const drops = Array(Math.floor(columns)).fill(0);
 let currentEffect = 0; // Variable to keep track of which effect is active
 let cycleDuration = 5000; // Cycle duration for each effect (5 seconds)
 
-// Slow down the matrix effect by 1 second (adjusted to 1533ms)
-const matrixSpeed = 1533;
+// Adjust speed for smooth motion
+const matrixSpeed = 100; // Slow motion speed for smoother falling effect
 
 // Color options for cycling
 const colorEffects = ['white', 'green', 'random', 'rgb'];
@@ -71,9 +71,9 @@ function drawMatrix() {
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
-        drops[i] += Math.random() * 2 + 1; // Random falling speed for each column
+        drops[i] += Math.random() * 1 + 0.5; // Random falling speed for each column, slower for smooth effect
     }
 }
 
-// Slow down the matrix effect by 1 second
-setInterval(drawMatrix, matrixSpeed); // Slowed by additional 1 second (1533ms)
+// Smooth slow-motion effect
+setInterval(drawMatrix, matrixSpeed); // Smooth falling effect at 100ms
