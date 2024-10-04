@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Countdown</title>
+    <title>Exam Countdown with Clocks</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Canvas for Matrix Background -->
     <canvas id="matrixCanvas"></canvas>
+
+    <!-- Clock Widget (Transparent Glass Effect) -->
+    <div class="glass-container glass-clocks">
+        <div class="clock">
+            <div id="regina"></div>
+            <div id="mumbai"></div>
+            <div id="london"></div>
+            <div id="toronto"></div>
+            <div id="atlanta"></div>
+        </div>
+    </div>
 
     <!-- Main container for flexible layout -->
     <div class="container">
@@ -21,26 +32,31 @@
                     <h3>Data Analyst Associate</h3>
                     <div id="timer1"></div>
                 </div>
+                <div class="blank-space"></div>
                 <div class="task">
                     <h3>Deadline: 9th Oct</h3>
                     <h3>Data Analyst</h3>
                     <div id="timer2"></div>
                 </div>
+                <div class="blank-space"></div>
                 <div class="task">
                     <h3>Deadline: 14th Oct</h3>
                     <h3>Data Science Associate</h3>
                     <div id="timer3"></div>
                 </div>
+                <div class="blank-space"></div>
                 <div class="task">
                     <h3>Deadline: 19th Oct</h3>
                     <h3>Data Scientist</h3>
                     <div id="timer4"></div>
                 </div>
+                <div class="blank-space"></div>
                 <div class="task">
                     <h3>Deadline: 23rd Oct</h3>
                     <h3>Data Engineering Associate</h3>
                     <div id="timer5"></div>
                 </div>
+                <div class="blank-space"></div>
                 <div class="task">
                     <h3>Deadline: 28th Oct</h3>
                     <h3>Data Engineer</h3>

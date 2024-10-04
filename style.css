@@ -7,7 +7,8 @@ body {
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
@@ -17,13 +18,48 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 40px;
     width: 100%;
-    height: 100vh;
     padding: 20px;
     box-sizing: border-box;
+}
+
+/* Transparent Glass Effect for Clock Widget */
+.glass-container {
+    backdrop-filter: blur(15px) saturate(200%);
+    background: rgba(255, 255, 255, 0.05); /* Transparent glass effect */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    text-align: center;
+    max-width: 90%;
+}
+
+/* Clock widget container */
+.glass-clocks {
+    position: absolute;
+    top: 10px; /* Positioned at the top of the screen */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1000px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Same glass transparency */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Individual clock style */
+.clock div {
+    flex: 1;
+    font-size: 1.5rem;
+    padding: 0 10px;
+    text-align: center;
 }
 
 /* Matrix falling code effect */
@@ -35,19 +71,6 @@ body {
     height: 100%;
     z-index: -1;
     background-color: black;
-}
-
-/* General glass effect styling */
-.glass-container {
-    backdrop-filter: blur(15px) saturate(200%);
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 20px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    width: 400px;
-    text-align: center;
-    max-width: 90%;
 }
 
 /* Countdown Section */

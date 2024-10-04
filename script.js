@@ -1,4 +1,21 @@
-// Matrix Falling Code Background with Glow/Illumination and Smooth Speed
+// World Clock Function
+function updateWorldClocks() {
+    const reginaTime = new Date().toLocaleString("en-US", { timeZone: "America/Regina" });
+    const mumbaiTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    const londonTime = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
+    const torontoTime = new Date().toLocaleString("en-US", { timeZone: "America/Toronto" });
+    const atlantaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+
+    document.getElementById('regina').textContent = "Regina: " + reginaTime;
+    document.getElementById('mumbai').textContent = "Mumbai: " + mumbaiTime;
+    document.getElementById('london').textContent = "London: " + londonTime;
+    document.getElementById('toronto').textContent = "Toronto: " + torontoTime;
+    document.getElementById('atlanta').textContent = "Atlanta: " + atlantaTime;
+}
+
+setInterval(updateWorldClocks, 1000); // Update every second
+
+// Matrix Falling Code Background with Slow Breathing Glow/Illumination
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -11,7 +28,7 @@ const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(0);
 
 let currentEffect = 0; // Variable to keep track of which effect is active
-let cycleDuration = 5000; // Cycle duration for each effect (5 seconds)
+let cycleDuration = 8000; // Slowed down cycle duration for each effect (8 seconds)
 
 // Speed for smooth falling effect
 const matrixSpeed = 20; // Smooth, fast effect
@@ -47,9 +64,9 @@ function cycleEffects() {
     currentEffect = (currentEffect + 1) % colorEffects.length; // Cycle through effects in order
 }
 
-setInterval(cycleEffects, cycleDuration); // Change effect every 5 seconds
+setInterval(cycleEffects, cycleDuration); // Change effect every 8 seconds (slowed down)
 
-// Draw the Matrix effect with glow and smooth falling and cycling colors
+// Draw the Matrix effect with slower glow/illumination effect and smooth falling
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -66,9 +83,9 @@ function drawMatrix() {
             ctx.fillStyle = getMatrixColor(); // Use the current effect's color
         }
 
-        // Add glow/illumination effect using shadow properties
+        // Add glow/illumination effect with slower breathing
         ctx.shadowColor = ctx.fillStyle; // Glow color same as the character color
-        ctx.shadowBlur = 15; // Amount of glow around the text
+        ctx.shadowBlur = 8; // Adjusted glow for slower breathing effect
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
@@ -79,5 +96,5 @@ function drawMatrix() {
     }
 }
 
-// Smooth effect speed set at 20ms interval for maximum fluidity
+// Slower breathing effect speed set at 20ms interval for maximum fluidity
 setInterval(drawMatrix, matrixSpeed);
