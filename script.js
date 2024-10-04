@@ -55,28 +55,44 @@ const fontSize = 16;
 const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(0);
 
-const matrixSpeed = 40; // Slower speed for movie-like effect
-const colorEffects = ['#0F0']; // Only green (Matrix Movie)
+const matrixSpeed = 80; // Slower fall speed for the matrix effect
+const glowEffectSpeed = 2000; // Slower breathing effect for the glow
+const colorEffects = ['#0F0']; // Green color for Matrix effect
 
 function drawMatrix() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    // Ensure the background remains black
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Light fade to black, ensuring glow doesn't affect the background
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Setting the font for the falling characters
     ctx.font = `${fontSize}px monospace`;
 
+    // Loop over the columns (drops)
     for (let i = 0; i < drops.length; i++) {
         const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillStyle = colorEffects[0]; // Matrix Green
-        ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = 10; // Glow effect around characters
 
+        // Matrix green with glow effect
+        ctx.fillStyle = colorEffects[0];
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 20; // Glow effect around characters
+
+        // Draw the text (falling character)
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
+        // Reset the drop to the top when it goes beyond the screen
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
-        drops[i] += 1;
+
+        // Move the drop down
+        drops[i]++;
     }
 }
 
+// Slower breathing effect for the glow (optional to smoothen glow in/out)
+function breatheEffect() {
+    ctx.globalAlpha = 0.5 + Math.sin(Date.now() / glowEffectSpeed) / 2; // Creates breathing effect
+}
+
+setInterval(breatheEffect, 100);
 setInterval(drawMatrix, matrixSpeed);
