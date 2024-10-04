@@ -102,11 +102,19 @@ h3 {
     background: rgba(0, 0, 0, 0.5);
     padding: 15px;
     border-radius: 8px;
+    text-align: center; /* Center the content */
+}
+
+.timers .task h3 {
+    margin-top: 5px;
+    font-size: 1.6rem;
+    text-align: center;
 }
 
 .timers .task div {
     font-size: 1.6rem;
     font-weight: bold;
+    text-align: center; /* Center the countdown text */
 }
 
 /* To-Do List Styling */
