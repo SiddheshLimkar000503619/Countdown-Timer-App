@@ -39,7 +39,7 @@ body {
 /* General glass effect styling */
 .glass-container {
     backdrop-filter: blur(15px) saturate(200%);
-    background: rgba(255, 255, 255, 0.05); /* Increased transparency */
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 20px;
@@ -49,45 +49,24 @@ body {
     max-width: 90%;
 }
 
-/* Specific glass effects for different sections */
-.glass-clocks {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.05); /* Match transparency */
+/* Countdown Section */
+h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
 }
 
-.glass-timers {
-    backdrop-filter: blur(20px) contrast(125%);
-    background: rgba(0, 0, 0, 0.05); /* Match transparency */
-    margin: auto;
-}
-
-.glass-tasks {
-    backdrop-filter: blur(15px) contrast(130%) saturate(180%);
-    background: rgba(255, 255, 255, 0.05); /* Match transparency */
-    margin: auto;
-}
-
-/* Clock style */
-.clock {
-    display: flex;
-    gap: 20px;
-    font-size: 1.5rem; /* Increased font size */
-}
-
-/* Countdown timer style */
 .task h3 {
-    margin: 10px 0;
+    margin-top: 20px;
+    font-size: 1.4rem;
+    text-align: center;
 }
 
 .task {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 #timer1, #timer2, #timer3, #timer4, #timer5, #timer6 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
 }
 
@@ -118,7 +97,6 @@ ul#todoList {
 ul#todoList li {
     padding: 5px;
     font-size: 18px;
-    cursor: pointer;
     display: flex;
     align-items: center;
 }
@@ -127,7 +105,7 @@ ul#todoList li input[type="checkbox"] {
     margin-right: 10px;
 }
 
-ul#todoList li::before {
-    content: counter(task-counter) '. ';
-    counter-increment: task-counter;
+ul#todoList li.done {
+    text-decoration: line-through;
+    color: #999; /* Dull color for completed tasks */
 }

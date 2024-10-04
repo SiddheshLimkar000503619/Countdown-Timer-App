@@ -37,13 +37,13 @@ function countdown(endTime, elementId) {
     }, 1000);
 }
 
-// Initialize countdown timers with new Data Engineering events
-countdown("2024-10-05T19:00:00", "timer1");
-countdown("2024-10-09T19:00:00", "timer2");
-countdown("2024-10-11T19:00:00", "timer3");
-countdown("2024-10-12T11:59:00", "timer4");
-countdown("2024-10-23T19:00:00", "timer5"); // Data Engineering with Python Certification
-countdown("2024-10-24T19:00:00", "timer6"); // Data Engineering Associate Exam
+// Initialize countdown timers
+countdown("2024-10-05T19:00:00", "timer1"); // Data Analyst Associate
+countdown("2024-10-09T19:00:00", "timer2"); // Data Analyst
+countdown("2024-10-14T19:00:00", "timer3"); // Data Science Associate
+countdown("2024-10-19T19:00:00", "timer4"); // Data Scientist
+countdown("2024-10-23T19:00:00", "timer5"); // Data Engineering Associate
+countdown("2024-10-28T19:00:00", "timer6"); // Data Engineer
 
 // Function to add tasks with a checkbox and numbering
 function addTodo() {
@@ -52,13 +52,25 @@ function addTodo() {
 
     const todoList = document.getElementById('todoList');
     const newTask = document.createElement('li');
-    newTask.innerHTML = `<input type="checkbox"> ${taskText}`;
+    newTask.innerHTML = `<input type="checkbox" onclick="completeTask(this)"> <span>${taskText}</span>`;
     todoList.appendChild(newTask);
 
     document.getElementById('newTodo').value = ''; // Clear input
 }
 
-// Matrix Falling Code Background with RGB Gaming Effect
+// Function to mark tasks as completed
+function completeTask(checkbox) {
+    const taskItem = checkbox.nextElementSibling;
+    if (checkbox.checked) {
+        taskItem.style.textDecoration = 'line-through';
+        taskItem.style.color = '#999'; // dull font
+    } else {
+        taskItem.style.textDecoration = 'none';
+        taskItem.style.color = '#fff';
+    }
+}
+
+// Matrix Falling Code Background with Gaming RGB Breathing Effect
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -74,26 +86,26 @@ const drops = Array(Math.floor(columns)).fill(0);
 let red = 255, green = 0, blue = 0;
 let colorDirection = 1; // For smooth RGB cycling
 
+// Function to create random shift times between 3 to 5 seconds
+function getRandomShiftTime() {
+    return Math.random() * (5000 - 3000) + 3000; // Random time between 3s and 5s
+}
+
 // Function to smoothly cycle through RGB colors for gaming effect
 function shiftMatrixColor() {
     if (colorDirection === 1) {
-        // Transitioning from red to green
         green += 5;
         if (green >= 255) colorDirection = 2;
     } else if (colorDirection === 2) {
-        // Transitioning from green to blue
         red -= 5;
         if (red <= 0) colorDirection = 3;
     } else if (colorDirection === 3) {
-        // Transitioning from blue to red
         blue += 5;
         if (blue >= 255) colorDirection = 4;
     } else if (colorDirection === 4) {
-        // Transitioning back to red from blue
         green -= 5;
         if (green <= 0) colorDirection = 5;
     } else if (colorDirection === 5) {
-        // Completing the cycle: blue back to red
         blue -= 5;
         red += 5;
         if (red >= 255) colorDirection = 1;
@@ -122,5 +134,5 @@ function drawMatrix() {
     }
 }
 
-setInterval(shiftMatrixColor, 33); // Adjust speed of RGB transition
+setInterval(shiftMatrixColor, getRandomShiftTime()); // Random shift times
 setInterval(drawMatrix, 33); // Adjust speed of falling code
