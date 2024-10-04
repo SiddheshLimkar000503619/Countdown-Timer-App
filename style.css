@@ -228,6 +228,7 @@ body {
 .countdown-widget .timers {
     max-height: 500px; /* Adjust as needed */
     overflow-y: auto;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); /* For Firefox */
 }
@@ -269,6 +270,7 @@ h3 {
     margin-top: 5px;
     font-size: 1.6rem;
     text-align: center;
+    word-wrap: break-word; /* Allow long words to break and wrap */
 }
 
 /* Countdown Timer Styles */
@@ -280,16 +282,13 @@ h3 {
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s;
+    box-sizing: border-box; /* Include padding and border in width */
+    width: 100%;
+    overflow: hidden; /* Hide any content that overflows horizontally */
 }
 
 .timers .task:hover {
     transform: scale(1.02);
-}
-
-.timers .task h3 {
-    margin-top: 5px;
-    font-size: 1.6rem;
-    text-align: center;
 }
 
 .timers .task div.timer {
