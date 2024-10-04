@@ -2,12 +2,28 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: black;
-    color: white;
-    font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* Theme Variables */
+:root {
+    --bg-color: #000;
+    --text-color: #fff;
+    --widget-bg: rgba(255, 255, 255, 0.05);
+    --widget-border: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] {
+    --bg-color: #fff;
+    --text-color: #000;
+    --widget-bg: rgba(0, 0, 0, 0.05);
+    --widget-border: rgba(0, 0, 0, 0.3);
 }
 
 /* Matrix Canvas Styling */
@@ -18,7 +34,114 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: black;
+    background-color: var(--bg-color);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Settings Toggle Button */
+.settings-toggle {
+    position: fixed;
+    top: 20px;
+    right: 60px;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Settings Panel */
+.settings-panel {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: var(--widget-bg);
+    border: 1px solid var(--widget-border);
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 2;
+    display: none;
+}
+
+.settings-panel h2 {
+    margin-top: 0;
+}
+
+.settings-panel label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Login Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+    background-color: var(--widget-bg);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid var(--widget-border);
+    width: 80%;
+    max-width: 400px;
+    color: var(--text-color);
+    border-radius: 10px;
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--widget-border);
+    border-radius: 5px;
+    background: none;
+    color: var(--text-color);
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--text-color);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 /* World Clock Container Styling */
@@ -35,11 +158,17 @@ body {
 .world-clock-widget {
     margin: 10px;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--widget-bg);
     border-radius: 10px;
-    color: #fff;
+    color: var(--text-color);
     text-align: center;
     min-width: 150px;
+    border: 1px solid var(--widget-border);
+    transition: transform 0.2s;
+}
+
+.world-clock-widget:hover {
+    transform: scale(1.05);
 }
 
 .world-clock-widget div {
@@ -62,13 +191,14 @@ body {
 .tasklist-widget {
     width: 45%;
     margin: 10px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--widget-bg);
     padding: 20px;
     border-radius: 20px;
-    color: #fff;
+    color: var(--text-color);
     backdrop-filter: blur(15px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--widget-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s;
 }
 
 @media (max-width: 768px) {
@@ -102,7 +232,13 @@ h3 {
     background: rgba(0, 0, 0, 0.5);
     padding: 15px;
     border-radius: 8px;
-    text-align: center; /* Center the content */
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.timers .task:hover {
+    transform: scale(1.02);
 }
 
 .timers .task h3 {
@@ -111,10 +247,15 @@ h3 {
     text-align: center;
 }
 
-.timers .task div {
+.timers .task div.timer {
     font-size: 1.6rem;
     font-weight: bold;
-    text-align: center; /* Center the countdown text */
+    text-align: center;
+}
+
+.timers .task progress {
+    width: 100%;
+    height: 10px;
 }
 
 /* To-Do List Styling */
@@ -128,8 +269,10 @@ input#newTodo {
     width: 70%;
     font-size: 16px;
     margin-bottom: 10px;
-    border: none;
+    border: 1px solid var(--widget-border);
     border-radius: 5px;
+    background: none;
+    color: var(--text-color);
 }
 
 button {
@@ -139,6 +282,8 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    background: var(--text-color);
+    color: var(--bg-color);
 }
 
 ul#todoList {
@@ -152,6 +297,7 @@ ul#todoList li {
     font-size: 18px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 ul#todoList li input[type="checkbox"] {
@@ -161,4 +307,18 @@ ul#todoList li input[type="checkbox"] {
 ul#todoList li.done {
     text-decoration: line-through;
     color: #999;
+}
+
+ul#todoList li button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
