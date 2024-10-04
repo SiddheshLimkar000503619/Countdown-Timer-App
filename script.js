@@ -1,10 +1,11 @@
 // World Clock Function
 function updateWorldClocks() {
-    const reginaTime = new Date().toLocaleString("en-US", { timeZone: "America/Regina" });
-    const mumbaiTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-    const londonTime = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
-    const torontoTime = new Date().toLocaleString("en-US", { timeZone: "America/Toronto" });
-    const atlantaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const reginaTime = new Date().toLocaleTimeString("en-US", { ...options, timeZone: "America/Regina" });
+    const mumbaiTime = new Date().toLocaleTimeString("en-US", { ...options, timeZone: "Asia/Kolkata" });
+    const londonTime = new Date().toLocaleTimeString("en-US", { ...options, timeZone: "Europe/London" });
+    const torontoTime = new Date().toLocaleTimeString("en-US", { ...options, timeZone: "America/Toronto" });
+    const atlantaTime = new Date().toLocaleTimeString("en-US", { ...options, timeZone: "America/New_York" });
 
     document.getElementById('regina').textContent = "Regina: " + reginaTime;
     document.getElementById('mumbai').textContent = "Mumbai: " + mumbaiTime;
@@ -20,12 +21,17 @@ function updateCountdown(deadline, elementId) {
     const now = new Date().getTime();
     const distance = deadline - now;
 
+    if (distance < 0) {
+        document.getElementById(elementId).textContent = "EXPIRED";
+        return;
+    }
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById(elementId).textContent = `${days}D ${hours}Hrs ${minutes}Mins ${seconds}Secs`;
+    document.getElementById(elementId).textContent = `${days}D ${hours}H ${minutes}M ${seconds}S`;
 }
 
 // Deadlines
@@ -43,49 +49,112 @@ setInterval(() => updateCountdown(deadline4, 'timer4'), 1000);
 setInterval(() => updateCountdown(deadline5, 'timer5'), 1000);
 setInterval(() => updateCountdown(deadline6, 'timer6'), 1000);
 
-// Matrix Falling Code Background (Movie-Like, ~350 FPS)
+// To-Do List Functionality
+function addTodo() {
+    const todoText = document.getElementById('newTodo').value.trim();
+    if (todoText === '') return;
+
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.onclick = function() {
+        li.classList.toggle('done');
+    };
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(todoText));
+    document.getElementById('todoList').appendChild(li);
+    document.getElementById('newTodo').value = '';
+}
+
+// Matrix Falling Code Background with Color Effects
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
-// Ensure canvas fills the screen at all times
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+// Set canvas dimensions
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+// Characters to display
+const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+const chars = matrixChars.split('');
 
-const letters = '0123456789ABCDEF';
+// Font size and columns
 const fontSize = 16;
 const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(0);
 
-// To simulate ~350 FPS, drawMatrix is called more frequently
-const matrixSpeed = 16; // Higher speed value for smooth animation, ~350 FPS (1 frame = ~2.86ms)
+// Array of drops - one per column
+const drops = Array.from({ length: columns }).fill(1);
 
+// Color sequence: white, green, random color per character, random RGB
+const colorSequence = ['white', 'green', 'randomPerChar', 'randomRGB'];
+let colorIndex = 0;
+
+// Function to get a random color
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    return '#' + Array.from({ length: 6 }).map(() => letters[Math.floor(Math.random() * 16)]).join('');
+}
+
+// Function to get a random RGB color
+function getRandomRGB() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;
+}
+
+// Main draw function
 function drawMatrix() {
-    // Ensure background remains black
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Keep the background black while fading the characters
+    // Semi-transparent background to create fading trail effect
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.font = `${fontSize}px monospace`;
 
-    for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+    // Loop over drops
+    drops.forEach((y, x) => {
+        // Get a random character
+        const text = chars[Math.floor(Math.random() * chars.length)];
 
-        // Matrix green color
-        ctx.fillStyle = '#0F0';
-
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        // Reset drop position when it reaches the bottom randomly
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
+        // Set color based on the current color sequence
+        switch (colorSequence[colorIndex]) {
+            case 'white':
+                ctx.fillStyle = '#FFFFFF';
+                break;
+            case 'green':
+                ctx.fillStyle = '#00FF00';
+                break;
+            case 'randomPerChar':
+                ctx.fillStyle = getRandomColor();
+                break;
+            case 'randomRGB':
+                ctx.fillStyle = getRandomRGB();
+                break;
         }
-        drops[i]++;
-    }
+
+        // Draw the character
+        ctx.fillText(text, x * fontSize, y * fontSize);
+
+        // Reset drop to top randomly
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[x] = 0;
+        }
+
+        // Increment y coordinate for drop
+        drops[x]++;
+    });
 }
 
-// Call the draw function approximately every 2.86 milliseconds (~350 FPS)
-setInterval(drawMatrix, matrixSpeed);
+// Change color every 5 seconds
+setInterval(() => {
+    colorIndex = (colorIndex + 1) % colorSequence.length;
+}, 5000);
+
+// Redraw matrix every 50 milliseconds
+setInterval(drawMatrix, 50);
+
+// Adjust canvas size on window resize
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});

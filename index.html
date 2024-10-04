@@ -10,48 +10,52 @@
     <!-- Canvas for Matrix Background -->
     <canvas id="matrixCanvas"></canvas>
 
-    <!-- World Clock (Horizontally Aligned in the Center at the Top) -->
-    <div class="glass-container glass-clocks">
-        <div class="clock">
+    <!-- World Clock Widget on Top in Horizontal Format -->
+    <div class="world-clock-container">
+        <div class="world-clock-widget">
             <div id="regina"></div>
+        </div>
+        <div class="world-clock-widget">
             <div id="mumbai"></div>
+        </div>
+        <div class="world-clock-widget">
             <div id="london"></div>
+        </div>
+        <div class="world-clock-widget">
             <div id="toronto"></div>
+        </div>
+        <div class="world-clock-widget">
             <div id="atlanta"></div>
         </div>
     </div>
 
-    <!-- Flexbox container for the countdown and task list -->
-    <div class="content-container">
-        <!-- Countdown Timers Widget -->
-        <div class="glass-container glass-timers">
+    <!-- Widgets Container -->
+    <div class="widgets-container">
+        <!-- Exam Countdown Timer Widget -->
+        <div class="countdown-widget">
             <h2>Exam Countdown</h2>
             <div class="timers">
+                <!-- Exam Countdown Timers -->
                 <div class="task">
                     <h3>5th Oct: Data Analyst Associate</h3>
                     <div id="timer1"></div>
                 </div>
-                <div class="blank-space"></div>
                 <div class="task">
                     <h3>9th Oct: Data Analyst</h3>
                     <div id="timer2"></div>
                 </div>
-                <div class="blank-space"></div>
                 <div class="task">
                     <h3>14th Oct: Data Science Associate</h3>
                     <div id="timer3"></div>
                 </div>
-                <div class="blank-space"></div>
                 <div class="task">
                     <h3>19th Oct: Data Scientist</h3>
                     <div id="timer4"></div>
                 </div>
-                <div class="blank-space"></div>
                 <div class="task">
                     <h3>23rd Oct: Data Engineering Associate</h3>
                     <div id="timer5"></div>
                 </div>
-                <div class="blank-space"></div>
                 <div class="task">
                     <h3>28th Oct: Data Engineer</h3>
                     <div id="timer6"></div>
@@ -60,7 +64,7 @@
         </div>
 
         <!-- Task List Widget -->
-        <div class="glass-container glass-tasks">
+        <div class="tasklist-widget">
             <h2>My To-Do List</h2>
             <div class="todo-container">
                 <input type="text" id="newTodo" placeholder="Add new task">
@@ -70,6 +74,7 @@
         </div>
     </div>
 
+    <!-- Include the JavaScript files -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -2,89 +2,109 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: black; /* Ensure background is always black */
+    background-color: black;
     color: white;
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
 }
 
-/* Flexbox container for widgets */
-.content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Reduced gap between widgets */
+/* Matrix Canvas Styling */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 1200px;
-    margin-top: 50px; /* Adjusted margin to place under clocks */
+    height: 100%;
+    z-index: -1;
+    background-color: black;
 }
 
-/* Title styling */
+/* World Clock Container Styling */
+.world-clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.world-clock-widget {
+    margin: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    min-width: 150px;
+}
+
+.world-clock-widget div {
+    font-size: 1.5rem;
+}
+
+/* Widgets Container Styling */
+.widgets-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.countdown-widget,
+.tasklist-widget {
+    width: 45%;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    color: #fff;
+    backdrop-filter: blur(15px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .widgets-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .countdown-widget,
+    .tasklist-widget {
+        width: 90%;
+    }
+}
+
+/* Heading Styles */
 h2 {
     margin-bottom: 10px;
     font-size: 2.2rem;
     text-align: center;
 }
 
-/* Transparent Glass Effect for all Widgets */
-.glass-container {
-    backdrop-filter: blur(15px) saturate(200%);
-    background: rgba(255, 255, 255, 0.05); /* Transparent glass effect */
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 15px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-/* Clock widget container (Horizontally Centered at the Top) */
-.glass-clocks {
-    position: absolute;
-    top: 20px; /* Positioned at the top */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-evenly; /* Align clocks in one horizontal row */
-    width: 90%;
-    max-width: 1000px;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Individual clock style */
-.clock div {
-    font-size: 1.5rem;
-    padding: 0 10px;
-    text-align: center;
-}
-
-/* Countdown Section */
-.task h3 {
+h3 {
     margin-top: 5px;
     font-size: 1.6rem;
     text-align: center;
 }
 
-.task {
-    margin-bottom: 10px; /* Less space between tasks */
+/* Countdown Timer Styles */
+.timers .task {
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
 }
 
-.blank-space {
-    height: 10px; /* Reduced spacing between countdowns */
-}
-
-#timer1, #timer2, #timer3, #timer4, #timer5, #timer6 {
+.timers .task div {
     font-size: 1.6rem;
     font-weight: bold;
 }
@@ -92,19 +112,25 @@ h2 {
 /* To-Do List Styling */
 .todo-container {
     margin-top: 10px;
+    text-align: center;
 }
 
 input#newTodo {
     padding: 10px;
-    width: 200px;
+    width: 70%;
     font-size: 16px;
     margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
 }
 
 button {
     padding: 10px;
     font-size: 16px;
     margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 ul#todoList {
@@ -127,28 +153,4 @@ ul#todoList li input[type="checkbox"] {
 ul#todoList li.done {
     text-decoration: line-through;
     color: #999;
-}
-
-/* Responsive Design */
-@media only screen and (max-width: 768px) {
-    .content-container {
-        flex-direction: column;
-        width: 95%;
-    }
-
-    .glass-clocks {
-        flex-direction: column; /* Stack clocks vertically on small screens */
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    .clock div {
-        font-size: 1.2rem;
-    }
-
-    .task h3 {
-        font-size: 1.4rem;
-    }
 }
