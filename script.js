@@ -62,7 +62,6 @@ const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(0);
 
 const matrixSpeed = 80; // Slow down matrix falling speed
-const colorEffects = ['#0F0']; // Matrix green
 
 function drawMatrix() {
     // Ensure background remains black
@@ -74,10 +73,8 @@ function drawMatrix() {
     for (let i = 0; i < drops.length; i++) {
         const text = letters.charAt(Math.floor(Math.random() * letters.length));
 
-        // Matrix green with glow effect
-        ctx.fillStyle = colorEffects[0];
-        ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = 15; // Glow effect around characters
+        // Matrix green color (without glow or breathing)
+        ctx.fillStyle = '#0F0';
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 

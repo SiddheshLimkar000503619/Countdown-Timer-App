@@ -18,17 +18,17 @@ body {
 .content-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 10px; /* Reduced gap between widgets */
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
-    margin-top: 20px; /* Minimal margin at the top */
+    margin-top: 50px; /* Adjusted margin to place under clocks */
 }
 
 /* Title styling */
 h2 {
-    margin-bottom: 10px; /* Slightly reduced space under titles */
+    margin-bottom: 10px;
     font-size: 2.2rem;
     text-align: center;
 }
@@ -39,22 +39,21 @@ h2 {
     background: rgba(255, 255, 255, 0.05); /* Transparent glass effect */
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 15px; /* Reduced padding */
+    padding: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     text-align: center;
     width: 100%;
     max-width: 500px;
 }
 
-/* Clock widget container */
+/* Clock widget container (Horizontally Centered at the Top) */
 .glass-clocks {
-    position: relative;
-    top: 10px;
+    position: absolute;
+    top: 20px; /* Positioned at the top */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-evenly; /* Align clocks in one horizontal row */
     width: 90%;
     max-width: 1000px;
     padding: 10px;
@@ -66,9 +65,8 @@ h2 {
 /* Individual clock style */
 .clock div {
     font-size: 1.5rem;
-    padding: 0 5px; /* Slightly reduced padding */
+    padding: 0 10px;
     text-align: center;
-    margin: 5px 0; /* Reduced margin */
 }
 
 /* Countdown Section */
@@ -139,11 +137,7 @@ ul#todoList li.done {
     }
 
     .glass-clocks {
-        width: 100%;
-    }
-
-    .glass-container {
-        max-width: 100%;
+        flex-direction: column; /* Stack clocks vertically on small screens */
     }
 
     h2 {
