@@ -37,32 +37,28 @@ function countdown(endTime, elementId) {
     }, 1000);
 }
 
-// Initialize countdown timers
+// Initialize countdown timers with new Data Engineering events
 countdown("2024-10-05T19:00:00", "timer1");
 countdown("2024-10-09T19:00:00", "timer2");
 countdown("2024-10-11T19:00:00", "timer3");
 countdown("2024-10-12T11:59:00", "timer4");
+countdown("2024-10-23T19:00:00", "timer5"); // Data Engineering with Python Certification
+countdown("2024-10-24T19:00:00", "timer6"); // Data Engineering Associate Exam
 
-// Function to start a 3-hour exam timer after deadline
-function startExamTimer(elementId) {
-    let examTime = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
-    const interval = setInterval(function () {
-        examTime -= 1000;
+// Function to add tasks with a checkbox and numbering
+function addTodo() {
+    const taskText = document.getElementById('newTodo').value;
+    if (taskText === '') return;
 
-        const hours = Math.floor((examTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((examTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((examTime % (1000 * 60)) / 1000);
+    const todoList = document.getElementById('todoList');
+    const newTask = document.createElement('li');
+    newTask.innerHTML = `<input type="checkbox"> ${taskText}`;
+    todoList.appendChild(newTask);
 
-        document.getElementById(elementId).textContent = `Exam Time Left: ${hours}h ${minutes}m ${seconds}s`;
-
-        if (examTime < 0) {
-            clearInterval(interval);
-            document.getElementById(elementId).textContent = "EXAM TIME'S UP!";
-        }
-    }, 1000);
+    document.getElementById('newTodo').value = ''; // Clear input
 }
 
-// Matrix Falling Code Background with Color Shifting
+// Matrix Falling Code Background with RGB Gaming Effect
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -75,21 +71,44 @@ const columns = canvas.width / fontSize;
 
 const drops = Array(Math.floor(columns)).fill(0);
 
-let matrixColor = '#0F0'; // Starting color (green)
+let red = 255, green = 0, blue = 0;
+let colorDirection = 1; // For smooth RGB cycling
 
-// Function to randomly change matrix color every 10 seconds
+// Function to smoothly cycle through RGB colors for gaming effect
 function shiftMatrixColor() {
-    const colors = ['#0F0', '#FFF', `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`];
-    matrixColor = colors[Math.floor(Math.random() * colors.length)];
+    if (colorDirection === 1) {
+        // Transitioning from red to green
+        green += 5;
+        if (green >= 255) colorDirection = 2;
+    } else if (colorDirection === 2) {
+        // Transitioning from green to blue
+        red -= 5;
+        if (red <= 0) colorDirection = 3;
+    } else if (colorDirection === 3) {
+        // Transitioning from blue to red
+        blue += 5;
+        if (blue >= 255) colorDirection = 4;
+    } else if (colorDirection === 4) {
+        // Transitioning back to red from blue
+        green -= 5;
+        if (green <= 0) colorDirection = 5;
+    } else if (colorDirection === 5) {
+        // Completing the cycle: blue back to red
+        blue -= 5;
+        red += 5;
+        if (red >= 255) colorDirection = 1;
+    }
 }
 
-setInterval(shiftMatrixColor, 10000); // Change color every 10 seconds
+function getMatrixColor() {
+    return `rgb(${red},${green},${blue})`;
+}
 
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = matrixColor; // Dynamic matrix color
+    ctx.fillStyle = getMatrixColor(); // Dynamic matrix color based on RGB effect
     ctx.font = `${fontSize}px monospace`;
 
     for (let i = 0; i < drops.length; i++) {
@@ -103,4 +122,5 @@ function drawMatrix() {
     }
 }
 
+setInterval(shiftMatrixColor, 33); // Adjust speed of RGB transition
 setInterval(drawMatrix, 33); // Adjust speed of falling code
