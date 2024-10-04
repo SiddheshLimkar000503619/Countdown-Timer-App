@@ -43,7 +43,7 @@ setInterval(() => updateCountdown(deadline4, 'timer4'), 1000);
 setInterval(() => updateCountdown(deadline5, 'timer5'), 1000);
 setInterval(() => updateCountdown(deadline6, 'timer6'), 1000);
 
-// Matrix Falling Code Background with Glow on Characters
+// Matrix Falling Code Background Like the Movie
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -58,7 +58,7 @@ const drops = Array(Math.floor(columns)).fill(0);
 let currentEffect = 0;
 let cycleDuration = 8000; // Slowed down cycle duration for each effect (8 seconds)
 
-const matrixSpeed = 20;
+const matrixSpeed = 40; // Adjusting for a more movie-like fall speed
 const colorEffects = ['white', 'green', 'random', 'rgb'];
 
 function getRandomColor() {
@@ -82,7 +82,7 @@ function cycleEffects() {
 setInterval(cycleEffects, cycleDuration);
 
 function drawMatrix() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 1)'; // Black background
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.font = `${fontSize}px monospace`;
@@ -96,8 +96,8 @@ function drawMatrix() {
             ctx.fillStyle = getMatrixColor();
         }
 
-        ctx.shadowColor = ctx.fillStyle; // Add glow to characters
-        ctx.shadowBlur = 15; // Glow effect around the characters
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 10; // Glow around the characters
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
