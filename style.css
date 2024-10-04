@@ -7,7 +7,7 @@ body {
     font-family: 'Roboto Mono', monospace;
     min-height: 100vh;
     position: relative;
-    /* Removed overflow: hidden to enable scrolling */
+    overflow-y: hidden; /* Hide scrollbars by default */
     transition: background-color 0.5s, color 0.5s;
 }
 
@@ -155,9 +155,12 @@ body {
 /* World Clock Title */
 .section-title {
     text-align: center;
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     color: var(--text-color);
     margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px var(--widget-bg);
 }
 
 /* World Clock Container Styling */
@@ -215,6 +218,12 @@ body {
     border: 1px solid var(--widget-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s;
+}
+
+/* Scroll feature for countdown widget */
+.countdown-widget .timers {
+    max-height: 500px; /* Adjust as needed */
+    overflow-y: auto;
 }
 
 @media (max-width: 768px) {

@@ -63,13 +63,32 @@ document.getElementById('welcomeModal').style.display = 'block';
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         document.getElementById('welcomeModal').style.display = 'none';
+        enableScrolling();
     }
 });
 
 // Hide the modal when the "Enter" button is clicked
 document.getElementById('enterButton').onclick = function() {
     document.getElementById('welcomeModal').style.display = 'none';
+    enableScrolling();
 };
+
+// Enable scrolling if content overflows or on zoom
+function enableScrolling() {
+    if (document.body.scrollHeight > window.innerHeight) {
+        document.body.style.overflowY = 'auto';
+    }
+}
+
+// Check for zoom changes and enable scrolling if needed
+let initialWidth = window.innerWidth;
+window.addEventListener('resize', function() {
+    if (window.innerWidth !== initialWidth) {
+        document.body.style.overflowY = 'auto';
+    } else {
+        document.body.style.overflowY = 'hidden';
+    }
+});
 
 // World Clock Function
 function updateWorldClocks() {
@@ -193,9 +212,13 @@ document.getElementById('toggleDeadlines').onclick = function() {
     if (additionalDeadlines.style.display === 'none') {
         additionalDeadlines.style.display = 'block';
         this.textContent = translations[currentLanguage]['hideAdditionalDeadlines'];
+        enableScrolling();
     } else {
         additionalDeadlines.style.display = 'none';
         this.textContent = translations[currentLanguage]['showAllDeadlines'];
+        if (document.body.scrollHeight <= window.innerHeight) {
+            document.body.style.overflowY = 'hidden';
+        }
     }
 };
 
