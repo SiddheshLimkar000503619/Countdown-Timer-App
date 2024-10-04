@@ -43,7 +43,7 @@ setInterval(() => updateCountdown(deadline4, 'timer4'), 1000);
 setInterval(() => updateCountdown(deadline5, 'timer5'), 1000);
 setInterval(() => updateCountdown(deadline6, 'timer6'), 1000);
 
-// Matrix Falling Code Background with Glow/Illumination
+// Matrix Falling Code Background with No Glow
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -96,9 +96,7 @@ function drawMatrix() {
             ctx.fillStyle = getMatrixColor();
         }
 
-        ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = 5; // Reduced glow to 10%
-
+        // Removed glow effect here
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
