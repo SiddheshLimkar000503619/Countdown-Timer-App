@@ -15,7 +15,7 @@ function updateWorldClocks() {
 
 setInterval(updateWorldClocks, 1000); // Update every second
 
-// Countdown Timer Function (D, Hrs, Mins, Secs)
+// Countdown Timer Function
 function updateCountdown(deadline, elementId) {
     const now = new Date().getTime();
     const distance = deadline - now;
@@ -28,7 +28,7 @@ function updateCountdown(deadline, elementId) {
     document.getElementById(elementId).textContent = `${days}D ${hours}Hrs ${minutes}Mins ${seconds}Secs`;
 }
 
-// Example deadlines (replace with actual values)
+// Deadlines
 const deadline1 = new Date('Oct 5, 2024 00:00:00').getTime();
 const deadline2 = new Date('Oct 9, 2024 00:00:00').getTime();
 const deadline3 = new Date('Oct 14, 2024 00:00:00').getTime();
@@ -43,7 +43,7 @@ setInterval(() => updateCountdown(deadline4, 'timer4'), 1000);
 setInterval(() => updateCountdown(deadline5, 'timer5'), 1000);
 setInterval(() => updateCountdown(deadline6, 'timer6'), 1000);
 
-// Matrix Falling Code Background Like the Movie
+// Matrix Falling Code Background (Movie-Like)
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -55,31 +55,8 @@ const fontSize = 16;
 const columns = canvas.width / fontSize;
 const drops = Array(Math.floor(columns)).fill(0);
 
-let currentEffect = 0;
-let cycleDuration = 8000; // Slowed down cycle duration for each effect (8 seconds)
-
-const matrixSpeed = 40; // Adjusting for a more movie-like fall speed
-const colorEffects = ['white', 'green', 'random', 'rgb'];
-
-function getRandomColor() {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return `rgb(${r},${g},${b})`;
-}
-
-function getMatrixColor() {
-    const effect = colorEffects[currentEffect];
-    if (effect === 'white') return '#FFF';
-    if (effect === 'green') return '#0F0';
-    if (effect === 'random') return getRandomColor();
-    if (effect === 'rgb') return getRandomColor();
-}
-
-function cycleEffects() {
-    currentEffect = (currentEffect + 1) % colorEffects.length;
-}
-setInterval(cycleEffects, cycleDuration);
+const matrixSpeed = 40; // Slower speed for movie-like effect
+const colorEffects = ['#0F0']; // Only green (Matrix Movie)
 
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -89,15 +66,9 @@ function drawMatrix() {
 
     for (let i = 0; i < drops.length; i++) {
         const text = letters.charAt(Math.floor(Math.random() * letters.length));
-
-        if (colorEffects[currentEffect] === 'rgb') {
-            ctx.fillStyle = getRandomColor();
-        } else {
-            ctx.fillStyle = getMatrixColor();
-        }
-
+        ctx.fillStyle = colorEffects[0]; // Matrix Green
         ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = 10; // Glow around the characters
+        ctx.shadowBlur = 10; // Glow effect around characters
 
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 

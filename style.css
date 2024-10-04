@@ -8,20 +8,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Center all elements */
+    justify-content: flex-start;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
 }
 
+/* Blank space between clocks and content */
+.spacer {
+    height: 80px; /* Equivalent to 2-4 blank spaces */
+}
+
 /* Flexbox container for widgets */
 .content-container {
     display: flex;
-    justify-content: space-between; /* Arrange exam countdown and task list side by side */
+    flex-direction: column; /* Stack on mobile */
+    justify-content: space-between; 
+    align-items: center;
     gap: 40px;
-    width: 80%;
-    max-width: 1200px; /* Limit maximum width for premium layout */
-    margin-top: 50px; /* Added space between world clocks and content */
+    width: 90%;
+    max-width: 1200px; 
 }
 
 /* Title styling */
@@ -41,13 +47,13 @@ h2 {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     text-align: center;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
 }
 
 /* Clock widget container */
 .glass-clocks {
-    position: absolute;
-    top: 20px; /* Positioned at the top of the screen */
+    position: relative;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -56,14 +62,13 @@ h2 {
     width: 90%;
     max-width: 1000px;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.1); /* Same glass transparency */
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Individual clock style */
 .clock div {
-    flex: 1;
     font-size: 1.5rem;
     padding: 0 10px;
     text-align: center;
@@ -82,7 +87,7 @@ h2 {
 }
 
 .blank-space {
-    height: 20px; /* Spacing between countdowns */
+    height: 20px;
 }
 
 #timer1, #timer2, #timer3, #timer4, #timer5, #timer6 {
@@ -127,5 +132,33 @@ ul#todoList li input[type="checkbox"] {
 
 ul#todoList li.done {
     text-decoration: line-through;
-    color: #999; /* Dull color for completed tasks */
+    color: #999;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+    .content-container {
+        flex-direction: column; /* Stack widgets on smaller screens */
+        width: 95%;
+    }
+
+    .glass-clocks {
+        width: 100%;
+    }
+
+    .glass-container {
+        max-width: 100%;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .clock div {
+        font-size: 1.2rem;
+    }
+
+    .task h3 {
+        font-size: 1.4rem;
+    }
 }
