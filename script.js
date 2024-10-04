@@ -1,4 +1,4 @@
-// Matrix Falling Code Background with Slow Smooth Speed and Color Effects
+// Matrix Falling Code Background with Movie-Like Speed and Color Cycling
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -13,10 +13,10 @@ const drops = Array(Math.floor(columns)).fill(0);
 let currentEffect = 0; // Variable to keep track of which effect is active
 let cycleDuration = 5000; // Cycle duration for each effect (5 seconds)
 
-// Adjust speed for smooth motion
-const matrixSpeed = 100; // Slow motion speed for smoother falling effect
+// Adjust speed to mimic Matrix movie
+const matrixSpeed = 50; // Fast speed for Matrix movie effect
 
-// Color options for cycling
+// Color options for cycling in order
 const colorEffects = ['white', 'green', 'random', 'rgb'];
 
 // Function to generate a random color
@@ -27,7 +27,7 @@ function getRandomColor() {
     return `rgb(${r},${g},${b})`;
 }
 
-// Function to cycle through the color effects
+// Function to cycle through the color effects in the specified order
 function getMatrixColor() {
     const effect = colorEffects[currentEffect];
 
@@ -44,12 +44,12 @@ function getMatrixColor() {
 
 // Function to switch between effects every cycleDuration
 function cycleEffects() {
-    currentEffect = (currentEffect + 1) % colorEffects.length; // Cycle through effects
+    currentEffect = (currentEffect + 1) % colorEffects.length; // Cycle through effects in order
 }
 
 setInterval(cycleEffects, cycleDuration); // Change effect every 5 seconds
 
-// Draw the Matrix effect with slower speed and cycling colors
+// Draw the Matrix effect with movie-like speed and cycling colors
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -71,9 +71,9 @@ function drawMatrix() {
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
-        drops[i] += Math.random() * 1 + 0.5; // Random falling speed for each column, slower for smooth effect
+        drops[i] += Math.random() * 2 + 1; // Random falling speed for each column, fast for movie-like effect
     }
 }
 
-// Smooth slow-motion effect
-setInterval(drawMatrix, matrixSpeed); // Smooth falling effect at 100ms
+// Fast movie-like effect speed at 50ms
+setInterval(drawMatrix, matrixSpeed);
