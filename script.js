@@ -10,7 +10,9 @@ const translations = {
         showMatrix: "Show Matrix Background",
         language: "Language",
         close: "Close",
-        expired: "EXPIRED"
+        expired: "EXPIRED",
+        showAllDeadlines: "Show All Deadlines",
+        hideAdditionalDeadlines: "Hide Additional Deadlines"
     },
     es: {
         examCountdown: "Cuenta regresiva de exámenes",
@@ -22,7 +24,9 @@ const translations = {
         showMatrix: "Mostrar fondo de Matrix",
         language: "Idioma",
         close: "Cerrar",
-        expired: "EXPIRADO"
+        expired: "EXPIRADO",
+        showAllDeadlines: "Mostrar todas las fechas límite",
+        hideAdditionalDeadlines: "Ocultar fechas límite adicionales"
     }
 };
 
@@ -33,7 +37,10 @@ function translatePage() {
         el.textContent = translations[currentLanguage][el.getAttribute('data-text')];
     });
     document.getElementById('newTodo').placeholder = translations[currentLanguage]['myToDoList'];
+    document.getElementById('toggleDeadlines').textContent = translations[currentLanguage]['showAllDeadlines'];
 }
+
+translatePage();
 
 // User Authentication
 let username = localStorage.getItem('username') || '';
@@ -104,8 +111,43 @@ const exams = [
         title: '5th Oct: Data Analyst Associate',
         details: 'Topics to study: SQL, Data Visualization, Excel.'
     },
-    // Add other exams here...
+    {
+        id: 2,
+        date: 'Oct 9, 2024 00:00:00',
+        title: '9th Oct: Data Analyst',
+        details: 'Topics to study: Data Mining, Python, R.'
+    },
+    {
+        id: 3,
+        date: 'Oct 14, 2024 00:00:00',
+        title: '14th Oct: Data Science Associate',
+        details: 'Topics to study: Machine Learning Basics, Statistics.'
+    },
+    {
+        id: 4,
+        date: 'Oct 19, 2024 00:00:00',
+        title: '19th Oct: Data Scientist',
+        details: 'Topics to study: Deep Learning, NLP, Advanced Algorithms.'
+    },
+    {
+        id: 5,
+        date: 'Oct 23, 2024 00:00:00',
+        title: '23rd Oct: Data Engineering Associate',
+        details: 'Topics to study: ETL Processes, Database Design.'
+    },
+    {
+        id: 6,
+        date: 'Oct 28, 2024 00:00:00',
+        title: '28th Oct: Data Engineer',
+        details: 'Topics to study: Big Data Technologies, Cloud Platforms.'
+    }
 ];
+
+// Initialize exam start times and notification flags
+exams.forEach(exam => {
+    exam.startTime = new Date().getTime();
+    exam.notified = false;
+});
 
 // Countdown Timer Function
 function updateCountdown() {
@@ -144,12 +186,6 @@ function updateCountdown() {
     });
 }
 
-// Initialize exam start times and notification flags
-exams.forEach(exam => {
-    exam.startTime = new Date().getTime();
-    exam.notified = false;
-});
-
 // Update countdown every second
 setInterval(updateCountdown, 1000);
 
@@ -163,6 +199,18 @@ function openExamModal(id) {
 
 document.getElementById('closeExamModal').onclick = function() {
     document.getElementById('examModal').style.display = 'none';
+};
+
+// Toggle Deadlines Display
+document.getElementById('toggleDeadlines').onclick = function() {
+    const additionalDeadlines = document.getElementById('additional-deadlines');
+    if (additionalDeadlines.style.display === 'none') {
+        additionalDeadlines.style.display = 'block';
+        this.textContent = translations[currentLanguage]['hideAdditionalDeadlines'];
+    } else {
+        additionalDeadlines.style.display = 'none';
+        this.textContent = translations[currentLanguage]['showAllDeadlines'];
+    }
 };
 
 // To-Do List Functionality with Local Storage
@@ -314,6 +362,3 @@ function startMatrix() {
 }
 
 startMatrix();
-
-// Initial Translation
-translatePage();
