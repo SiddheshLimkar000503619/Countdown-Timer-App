@@ -1,4 +1,4 @@
-// Matrix Falling Code Background with Movie-Like Speed and Color Cycling
+// Matrix Falling Code Background with Glow/Illumination and Smooth Speed
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -13,8 +13,8 @@ const drops = Array(Math.floor(columns)).fill(0);
 let currentEffect = 0; // Variable to keep track of which effect is active
 let cycleDuration = 5000; // Cycle duration for each effect (5 seconds)
 
-// Adjust speed to mimic Matrix movie
-const matrixSpeed = 50; // Fast speed for Matrix movie effect
+// Speed for smooth falling effect
+const matrixSpeed = 20; // Smooth, fast effect
 
 // Color options for cycling in order
 const colorEffects = ['white', 'green', 'random', 'rgb'];
@@ -49,7 +49,7 @@ function cycleEffects() {
 
 setInterval(cycleEffects, cycleDuration); // Change effect every 5 seconds
 
-// Draw the Matrix effect with movie-like speed and cycling colors
+// Draw the Matrix effect with glow and smooth falling and cycling colors
 function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Slight trail effect
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -66,14 +66,18 @@ function drawMatrix() {
             ctx.fillStyle = getMatrixColor(); // Use the current effect's color
         }
 
+        // Add glow/illumination effect using shadow properties
+        ctx.shadowColor = ctx.fillStyle; // Glow color same as the character color
+        ctx.shadowBlur = 15; // Amount of glow around the text
+
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
-        drops[i] += Math.random() * 2 + 1; // Random falling speed for each column, fast for movie-like effect
+        drops[i] += 1; // Smooth, uniform falling speed for each column
     }
 }
 
-// Fast movie-like effect speed at 50ms
+// Smooth effect speed set at 20ms interval for maximum fluidity
 setInterval(drawMatrix, matrixSpeed);
