@@ -3,30 +3,16 @@ const translations = {
     en: {
         examCountdown: "Exam Countdown",
         myToDoList: "My To-Do List",
-        login: "Login",
-        usernamePlaceholder: "Username",
-        loginButton: "Login",
-        settings: "Settings",
-        showMatrix: "Show Matrix Background",
-        language: "Language",
-        close: "Close",
-        expired: "EXPIRED",
         showAllDeadlines: "Show All Deadlines",
-        hideAdditionalDeadlines: "Hide Additional Deadlines"
+        hideAdditionalDeadlines: "Hide Additional Deadlines",
+        expired: "EXPIRED"
     },
     es: {
         examCountdown: "Cuenta regresiva de exámenes",
         myToDoList: "Mi Lista de Tareas",
-        login: "Iniciar sesión",
-        usernamePlaceholder: "Nombre de usuario",
-        loginButton: "Iniciar sesión",
-        settings: "Configuraciones",
-        showMatrix: "Mostrar fondo de Matrix",
-        language: "Idioma",
-        close: "Cerrar",
-        expired: "EXPIRADO",
         showAllDeadlines: "Mostrar todas las fechas límite",
-        hideAdditionalDeadlines: "Ocultar fechas límite adicionales"
+        hideAdditionalDeadlines: "Ocultar fechas límite adicionales",
+        expired: "EXPIRADO"
     }
 };
 
@@ -41,21 +27,6 @@ function translatePage() {
 }
 
 translatePage();
-
-// User Authentication
-let username = localStorage.getItem('username') || '';
-
-if (!username) {
-    document.getElementById('loginModal').style.display = 'block';
-}
-
-document.getElementById('loginButton').onclick = function() {
-    username = document.getElementById('username').value.trim();
-    if (username) {
-        localStorage.setItem('username', username);
-        document.getElementById('loginModal').style.display = 'none';
-    }
-};
 
 // Theme Toggle
 document.getElementById('themeToggle').onclick = function() {
@@ -83,6 +54,21 @@ document.getElementById('languageSelect').onchange = function() {
 document.getElementById('toggleMatrix').onchange = function() {
     const canvas = document.getElementById('matrixCanvas');
     canvas.style.display = this.checked ? 'block' : 'none';
+};
+
+// Welcome Modal Functionality
+document.getElementById('welcomeModal').style.display = 'block';
+
+// Hide the modal when Enter key is pressed
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        document.getElementById('welcomeModal').style.display = 'none';
+    }
+});
+
+// Hide the modal when the "Enter" button is clicked
+document.getElementById('enterButton').onclick = function() {
+    document.getElementById('welcomeModal').style.display = 'none';
 };
 
 // World Clock Function

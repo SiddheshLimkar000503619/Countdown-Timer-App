@@ -42,17 +42,17 @@
         <button id="closeSettings">Close</button>
     </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
         <div class="modal-content">
-            <h2>Login</h2>
-            <input type="text" id="username" placeholder="Username">
-            <button id="loginButton">Login</button>
+            <h2>Welcome, Challenger!</h2>
+            <p>Press Enter to embark on your journey.</p>
+            <button id="enterButton">Enter</button>
         </div>
     </div>
 
     <!-- World Clock Widget -->
-    <h2 class="section-title"><i class="fas fa-clock"></i> World Clocks</h2>
+    <h2 class="section-title"><i class="fas fa-stopwatch"></i> World Clocks</h2>
     <div class="world-clock-container">
         <div class="world-clock-widget">
             <div id="regina"></div>
@@ -78,34 +78,34 @@
             <h2><i class="fas fa-calendar-alt"></i> <span data-text="examCountdown">Exam Countdown</span></h2>
             <div class="timers">
                 <!-- Exam Countdown Timers -->
-                <div class="task">
+                <div class="task" onclick="openExamModal(1)">
                     <h3>5th Oct: Data Analyst Associate</h3>
                     <div id="timer1" class="timer"></div>
                     <progress id="progress1" value="0" max="100"></progress>
                 </div>
-                <div class="task">
+                <div class="task" onclick="openExamModal(2)">
                     <h3>9th Oct: Data Analyst</h3>
                     <div id="timer2" class="timer"></div>
                     <progress id="progress2" value="0" max="100"></progress>
                 </div>
-                <div class="task">
+                <div class="task" onclick="openExamModal(3)">
                     <h3>14th Oct: Data Science Associate</h3>
                     <div id="timer3" class="timer"></div>
                     <progress id="progress3" value="0" max="100"></progress>
                 </div>
                 <!-- Hidden deadlines -->
                 <div id="additional-deadlines" style="display: none;">
-                    <div class="task">
+                    <div class="task" onclick="openExamModal(4)">
                         <h3>19th Oct: Data Scientist</h3>
                         <div id="timer4" class="timer"></div>
                         <progress id="progress4" value="0" max="100"></progress>
                     </div>
-                    <div class="task">
+                    <div class="task" onclick="openExamModal(5)">
                         <h3>23rd Oct: Data Engineering Associate</h3>
                         <div id="timer5" class="timer"></div>
                         <progress id="progress5" value="0" max="100"></progress>
                     </div>
-                    <div class="task">
+                    <div class="task" onclick="openExamModal(6)">
                         <h3>28th Oct: Data Engineer</h3>
                         <div id="timer6" class="timer"></div>
                         <progress id="progress6" value="0" max="100"></progress>

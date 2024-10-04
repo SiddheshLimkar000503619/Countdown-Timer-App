@@ -7,7 +7,7 @@ body {
     font-family: 'Roboto Mono', monospace;
     min-height: 100vh;
     position: relative;
-    overflow: hidden;
+    /* Removed overflow: hidden to enable scrolling */
     transition: background-color 0.5s, color 0.5s;
 }
 
@@ -96,7 +96,7 @@ body {
     color: var(--bg-color);
 }
 
-/* Login Modal */
+/* Welcome Modal */
 .modal {
     display: none;
     position: fixed;
@@ -126,20 +126,13 @@ body {
     margin-top: 0;
 }
 
-.modal-content input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid var(--widget-border);
-    border-radius: 5px;
-    background: none;
-    color: var(--text-color);
-    font-size: 1rem;
+.modal-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
 .modal-content button {
-    width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
     background: var(--text-color);
     color: var(--bg-color);
     border: none;
@@ -148,6 +141,7 @@ body {
     font-size: 1rem;
 }
 
+/* Close button for modals */
 .close {
     position: absolute;
     top: 10px;
